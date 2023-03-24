@@ -7,27 +7,29 @@ interface InputWrapperProps {
   setValue: (v: string) => void;
   openPicker: () => void;
   closePicker: () => void;
+  isShowing: boolean;
+  setIsShowing: (v: boolean) => void;
 }
 
 export default (props: InputWrapperProps) => {
   const { register } = useFormContext();
-  const [isShowing, setIsShowing] = React.useState(false);
 
   return (
     <div
       onClick={(e) => {
-        if (!isShowing) {
+        if (!props.isShowing) {
           props.openPicker();
-          setIsShowing(true);
+          props.setIsShowing(true);
         } else {
           props.closePicker();
-          setIsShowing(false);
+          props.setIsShowing(false);
         }
       }}
+      style={{ position: 'absolute', zIndex: 1000 }}
     >
       <input
         type="text"
-        readOnly={isShowing}
+        readOnly={props.isShowing}
         {...register(props.name)}
         value={props.value}
         onChange={(e) => {

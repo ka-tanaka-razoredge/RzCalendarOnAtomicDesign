@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useFormContext } from 'react-hook-form';
 import InputTextWrapper from './atoms/InputTextWrapper';
 import FlatpickrWrapper from './atoms/FlatpickrWrapper';
 import useDate from './utilities/useDate';
@@ -12,6 +11,7 @@ interface RzCalendarProps {
 export default React.forwardRef((props: RzCalendarProps, ref) => {
   const picker = React.useRef<Flatpickr>(null);
   const [value, setValue] = React.useState(useDate().inquire2Decades());
+  const [isShowing, setIsShowing] = React.useState(false);
 
   const toDateString = (source, delimiter) => {
     const memento = source.split(delimiter);
@@ -22,7 +22,7 @@ export default React.forwardRef((props: RzCalendarProps, ref) => {
   };
 
   React.useEffect(() => {
-    picker.current.flatpickr.setDate(new Date(toDateString(value, '/')));
+    picker.current.flatpickr.setDate(new Date(value));
   }, [value]);
 
   const openPicker = () => {
@@ -41,6 +41,8 @@ export default React.forwardRef((props: RzCalendarProps, ref) => {
         openPicker={openPicker}
         closePicker={closePicker}
         setValue={setValue}
+        isShowing={isShowing}
+        setIsShowing={setIsShowing}
       />
       <FlatpickrWrapper ref={picker} setValue={setValue} />
     </div>
