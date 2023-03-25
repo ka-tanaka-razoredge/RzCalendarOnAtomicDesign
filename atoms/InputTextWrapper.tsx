@@ -8,11 +8,19 @@ interface InputWrapperProps {
   openPicker: () => void;
   closePicker: () => void;
   isShowing: boolean;
-  setIsShowing: (v: boolean) => void;
+  setIsShowing?: (v: boolean) => void;
 }
 
 export default (props: InputWrapperProps) => {
   const { register } = useFormContext();
+
+  const isReadOnly = () => {
+    if (!props.setIsShowing) {
+      return false;
+    } else {
+      return props.isShowing;
+    }
+  };
 
   return (
     <div
@@ -29,7 +37,7 @@ export default (props: InputWrapperProps) => {
     >
       <input
         type="text"
-        readOnly={props.isShowing}
+        readOnly={isReadOnly()}
         {...register(props.name)}
         value={props.value}
         onChange={(e) => {
