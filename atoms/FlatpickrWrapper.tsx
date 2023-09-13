@@ -15,7 +15,10 @@ interface RzCalendarProps {
 
 export default React.forwardRef(
   (
-    props: { setValue: (v: string) => void; setIsShowing: Function },
+    props: {
+      setValue: (v: string) => void;
+      setIsShowing: (v: boolean) => void;
+    },
     ref: React.Ref<Flatpickr>
   ) => {
     const { formatDate } = useDate();
