@@ -44,7 +44,11 @@ export default React.forwardRef((props: RzCalendarProps, ref) => {
         isShowing={isShowing}
         setIsShowing={setIsShowing}
       />
-      <FlatpickrWrapper ref={picker} setValue={setValue} />
+      <FlatpickrWrapper
+        ref={picker}
+        setIsShowing={setIsShowing}
+        setValue={setValue}
+      />
     </div>
   );
 });

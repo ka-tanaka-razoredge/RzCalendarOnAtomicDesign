@@ -14,13 +14,19 @@ interface RzCalendarProps {
 }
 
 export default React.forwardRef(
-  (props: { setValue: (v: string) => void }, ref: React.Ref<Flatpickr>) => {
+  (
+    props: { setValue: (v: string) => void; setIsShowing: Function },
+    ref: React.Ref<Flatpickr>
+  ) => {
     const { formatDate } = useDate();
     return (
       <Flatpickr
         ref={ref}
         options={{
           allowInput: true,
+        }}
+        onClose={(e) => {
+          props.setIsShowing(false);
         }}
         onChange={(e) => {
           console.log(e);
