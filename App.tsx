@@ -32,7 +32,6 @@ export default function App() {
   });
   const {
     formState: { errors },
-    setValue,
     handleSubmit,
   } = useFormMethods;
 
